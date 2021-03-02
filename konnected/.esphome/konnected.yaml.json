@@ -1,0 +1,24 @@
+{
+  "storage_version": 1,
+  "name": "konnected",
+  "comment": null,
+  "esphome_version": "1.16.2",
+  "src_version": 1,
+  "arduino_version": "espressif32@1.12.4",
+  "address": "konnected.local",
+  "esp_platform": "ESP32",
+  "board": "nodemcu-32s",
+  "build_path": "konnected",
+  "firmware_bin_path": "konnected/.pioenvs/konnected/firmware.bin",
+  "loaded_integrations": [
+    "async_tcp",
+    "binary_sensor",
+    "esphome",
+    "ethernet",
+    "gpio",
+    "json",
+    "mqtt",
+    "network",
+    "ota"
+  ]
+}

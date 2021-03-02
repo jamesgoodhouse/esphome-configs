@@ -1,0 +1,57 @@
+in: |
+  esphome:
+    name: konnected
+    platform: ESP32
+    board: nodemcu-32s
+
+  ethernet:
+    type: LAN8720
+    mdc_pin: GPIO23
+    mdio_pin: GPIO18
+
+  ota:
+    safe_mode: True
+    password: {{ (ds "secrets").ota.password }}
+    port: 3232
+    reboot_timeout: 5min
+    num_attempts: 10
+
+  # wifi:
+  #   ssid: {{ (ds "secrets").wifi.ssid }}
+  #   password: {{ (ds "secrets").wifi.password }}
+
+  logger:
+    level: DEBUG
+
+  mqtt:
+    broker: {{ (ds "secrets").mqtt.broker }}
+    port: 8883
+    username: {{ (ds "secrets").mqtt.username }}
+    password: {{ (ds "secrets").mqtt.password }}
+    topic_prefix: konnected
+
+  binary_sensor:
+  - platform: gpio
+    name: "Front Door"
+    device_class: door
+    pin:
+      number: 1
+  - platform: gpio
+    name: "Deck Door"
+    device_class: door
+    pin:
+      number: 2
+  - platform: gpio
+    name: "Garage Door"
+    device_class: door
+    pin:
+      number: 3
+  - platform: gpio
+    name: "Motion"
+    device_class: motion
+    pin:
+      number: 4
+
+datasources:
+  secrets:
+    url: secrets.yaml
