@@ -31,6 +31,16 @@ in: |
     topic_prefix: konnected
     discovery: false
 
+  web_server:
+    port: {{ (ds "secrets").web_server.port }}
+    css_include: "/Users/james/Development/github.com/esphome/esphome-docs/_static/webserver-v1.min.css"
+    css_url: ""
+    js_include: "/Users/james/Development/github.com/esphome/esphome-docs/_static/webserver-v1.min.js"
+    js_url: ""
+    auth:
+      username: {{ (ds "secrets").web_server.auth.username }}
+      password: {{ (ds "secrets").web_server.auth.password }}
+
   # KONN1  -> GPIO4  (INPUT_PULLUP)
   # KONN2  -> GPIO2  (INPUT_PULLUP)
   # KONN3  -> GPIO15 (INPUT_PULLUP)
