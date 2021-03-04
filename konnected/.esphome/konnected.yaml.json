@@ -14,11 +14,12 @@
     "async_tcp",
     "binary_sensor",
     "esphome",
-    "ethernet",
     "gpio",
     "json",
+    "logger",
     "mqtt",
     "network",
-    "ota"
+    "ota",
+    "wifi"
   ]
 }

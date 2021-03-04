@@ -4,10 +4,10 @@ in: |
     platform: ESP32
     board: nodemcu-32s
 
-  ethernet:
-    type: LAN8720
-    mdc_pin: GPIO23
-    mdio_pin: GPIO18
+  # ethernet:
+  #   type: LAN8720
+  #   mdc_pin: GPIO23
+  #   mdio_pin: GPIO18
 
   ota:
     safe_mode: True
@@ -16,41 +16,54 @@ in: |
     reboot_timeout: 5min
     num_attempts: 10
 
-  # wifi:
-  #   ssid: {{ (ds "secrets").wifi.ssid }}
-  #   password: {{ (ds "secrets").wifi.password }}
+  wifi:
+    ssid: {{ (ds "secrets").wifi.ssid }}
+    password: {{ (ds "secrets").wifi.password }}
 
   logger:
-    level: DEBUG
+    level: INFO
 
   mqtt:
     broker: {{ (ds "secrets").mqtt.broker }}
-    port: 8883
+    port: 1883
     username: {{ (ds "secrets").mqtt.username }}
     password: {{ (ds "secrets").mqtt.password }}
     topic_prefix: konnected
+    discovery: false
 
+  # KONN1  -> GPIO4  (INPUT_PULLUP)
+  # KONN2  -> GPIO2  (INPUT_PULLUP)
+  # KONN3  -> GPIO15 (INPUT_PULLUP)
+  # KONN4  -> GPIO13 (INPUT_PULLUP)
+  # KONN5  -> GPIO18 (INPUT_PULLUP)
+  # KONN6  -> GPIO14 (INPUT_PULLUP)
+  # KONN7  -> GPIO33 (INPUT_PULLUP)
+  # KONN8  -> GPIO32 (INPUT_PULLUP)
+  # KONN9  -> GPIO36
+  # KONN10 -> GPIO39
+  # KONN11 -> GPIO34
+  # KONN12 -> GPIO35
   binary_sensor:
   - platform: gpio
-    name: "Front Door"
-    device_class: door
-    pin:
-      number: 1
-  - platform: gpio
-    name: "Deck Door"
-    device_class: door
-    pin:
-      number: 2
-  - platform: gpio
-    name: "Garage Door"
-    device_class: door
-    pin:
-      number: 3
-  - platform: gpio
-    name: "Motion"
+    name: motion_detector
     device_class: motion
     pin:
-      number: 4
+      number: GPIO36
+  - platform: gpio
+    name: front_door
+    device_class: door
+    pin:
+      number: GPIO39
+  - platform: gpio
+    name: deck_door
+    device_class: door
+    pin:
+      number: GPIO34
+  - platform: gpio
+    name: garage_entry_door
+    device_class: door
+    pin:
+      number: GPIO35
 
 datasources:
   secrets:
