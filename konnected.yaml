@@ -7,19 +7,19 @@ ethernet:
   type: LAN8720
   mdc_pin: GPIO16
   mdio_pin: GPIO17
-  domain: !secret ethernet__domain
+  domain: !secret konnected__ethernet__domain
 
 ota:
   safe_mode: True
-  password: !secret ota__password
+  password: !secret konnected__ota__password
   port: 3232
   reboot_timeout: 5min
   num_attempts: 10
 
 # wifi:
-#   domain: !secret wifi__domain
-#   ssid: !secret wifi__ssid
-#   password: !secret wifi__password
+#   domain: !secret konnected__wifi__domain
+#   ssid: !secret konnected__wifi__ssid
+#   password: !secret konnected__wifi__password
 
 status_led:
   pin: GPIO3
@@ -28,10 +28,10 @@ logger:
   level: INFO
 
 mqtt:
-  broker: !secret mqtt__broker
+  broker: !secret konnected__mqtt__broker
   port: 1883
-  username: !secret mqtt__username
-  password: !secret mqtt__password
+  username: !secret konnected__mqtt__username
+  password: !secret konnected__mqtt__password
   topic_prefix: konnected
   discovery: false
   birth_message:
@@ -42,14 +42,14 @@ mqtt:
     payload: "OFF"
 
 web_server:
-  port: !secret web_server__port
-  css_include: "./../esphome-docs/_static/webserver-v1.min.css"
+  port: !secret konnected__web_server__port
+  css_include: "./esphome-docs/_static/webserver-v1.min.css"
   css_url: ""
-  js_include: "./../esphome-docs/_static/webserver-v1.min.js"
+  js_include: "./esphome-docs/_static/webserver-v1.min.js"
   js_url: ""
   auth:
-    username: !secret web_server__auth__username
-    password: !secret web_server__auth__password
+    username: !secret konnected__web_server__auth__username
+    password: !secret konnected__web_server__auth__password
 
 # KONN1  -> GPIO4  (INPUT_PULLUP)
 # KONN2  -> GPIO2  (INPUT_PULLUP)
