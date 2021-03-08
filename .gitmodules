@@ -1,0 +1,3 @@
+[submodule "esphome-docs"]
+	path = esphome-docs
+	url = git@github.com:esphome/esphome-docs.git

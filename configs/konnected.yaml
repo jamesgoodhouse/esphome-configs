@@ -1,0 +1,91 @@
+esphome:
+  name: konnected
+  platform: ESP32
+  board: wesp32
+
+ethernet:
+  type: LAN8720
+  mdc_pin: GPIO16
+  mdio_pin: GPIO17
+  domain: !secret ethernet__domain
+
+ota:
+  safe_mode: True
+  password: !secret ota__password
+  port: 3232
+  reboot_timeout: 5min
+  num_attempts: 10
+
+# wifi:
+#   domain: !secret wifi__domain
+#   ssid: !secret wifi__ssid
+#   password: !secret wifi__password
+
+status_led:
+  pin: GPIO3
+
+logger:
+  level: INFO
+
+mqtt:
+  broker: !secret mqtt__broker
+  port: 1883
+  username: !secret mqtt__username
+  password: !secret mqtt__password
+  topic_prefix: konnected
+  discovery: false
+  birth_message:
+    topic: konnected/status
+    payload: "ON"
+  will_message:
+    topic: konnected/status
+    payload: "OFF"
+
+web_server:
+  port: !secret web_server__port
+  css_include: "./../esphome-docs/_static/webserver-v1.min.css"
+  css_url: ""
+  js_include: "./../esphome-docs/_static/webserver-v1.min.js"
+  js_url: ""
+  auth:
+    username: !secret web_server__auth__username
+    password: !secret web_server__auth__password
+
+# KONN1  -> GPIO4  (INPUT_PULLUP)
+# KONN2  -> GPIO2  (INPUT_PULLUP)
+# KONN3  -> GPIO15 (INPUT_PULLUP)
+# KONN4  -> GPIO13 (INPUT_PULLUP)
+# KONN5  -> GPIO18 (INPUT_PULLUP)
+# KONN6  -> GPIO14 (INPUT_PULLUP)
+# KONN7  -> GPIO33 (INPUT_PULLUP)
+# KONN8  -> GPIO32 (INPUT_PULLUP)
+# KONN9  -> GPIO36
+# KONN10 -> GPIO39
+# KONN11 -> GPIO34
+# KONN12 -> GPIO35
+# https://help.konnected.io/support/solutions/articles/32000026808-pin-mapping
+binary_sensor:
+- platform: gpio
+  name: motion_detector
+  device_class: motion
+  pin:
+    number: GPIO36
+    mode: INPUT_PULLUP
+- platform: gpio
+  name: front_door
+  device_class: door
+  pin:
+    number: GPIO39
+    mode: INPUT_PULLUP
+- platform: gpio
+  name: deck_door
+  device_class: door
+  pin:
+    number: GPIO34
+    mode: INPUT_PULLUP
+- platform: gpio
+  name: garage_entry_door
+  device_class: door
+  pin:
+    number: GPIO35
+    mode: INPUT_PULLUP
