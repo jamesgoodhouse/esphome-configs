@@ -79,10 +79,10 @@ binary_sensor:
     mode: INPUT_PULLUP
   on_press:
     then:
-    - text_sensor.template.publish: {id: front_door, state: "OPEN"}
+    - text_sensor.template.publish: { id: front_door, state: "OPEN" }
   on_release:
     then:
-    - text_sensor.template.publish: {id: front_door, state: "CLOSED"}
+    - text_sensor.template.publish: { id: front_door, state: "CLOSED" }
 - platform: gpio
   id: deck_door_binary_sensor
   device_class: door
@@ -91,10 +91,10 @@ binary_sensor:
     mode: INPUT_PULLUP
   on_press:
     then:
-    - text_sensor.template.publish: {id: deck_door, state: "OPEN"}
+    - text_sensor.template.publish: { id: deck_door, state: "OPEN" }
   on_release:
     then:
-    - text_sensor.template.publish: {id: deck_door, state: "CLOSED"}
+    - text_sensor.template.publish: { id: deck_door, state: "CLOSED" }
 - platform: gpio
   id: garage_entry_door_binary_sensor
   device_class: door
@@ -102,10 +102,10 @@ binary_sensor:
     number: GPIO35
   on_press:
     then:
-    - text_sensor.template.publish: {id: garage_entry_door, state: "OPEN"}
+    - text_sensor.template.publish: { id: garage_entry_door, state: "OPEN" }
   on_release:
     then:
-    - text_sensor.template.publish: {id: garage_entry_door, state: "CLOSED"}
+    - text_sensor.template.publish: { id: garage_entry_door, state: "CLOSED" }
 
 text_sensor:
 - platform: template
