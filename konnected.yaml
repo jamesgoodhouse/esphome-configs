@@ -72,20 +72,54 @@ binary_sensor:
     number: GPIO36
     mode: INPUT_PULLUP
 - platform: gpio
-  name: front_door
+  id: front_door_binary_sensor
   device_class: door
   pin:
     number: GPIO39
     mode: INPUT_PULLUP
+  on_press:
+    then:
+    - text_sensor.template.publish: {id: front_door, state: "OPEN"}
+  on_release:
+    then:
+    - text_sensor.template.publish: {id: front_door, state: "CLOSED"}
 - platform: gpio
-  name: deck_door
+  id: deck_door_binary_sensor
   device_class: door
   pin:
     number: GPIO34
     mode: INPUT_PULLUP
+  on_press:
+    then:
+    - text_sensor.template.publish: {id: deck_door, state: "OPEN"}
+  on_release:
+    then:
+    - text_sensor.template.publish: {id: deck_door, state: "CLOSED"}
 - platform: gpio
-  name: garage_entry_door
+  id: garage_entry_door_binary_sensor
   device_class: door
   pin:
     number: GPIO35
-    mode: INPUT_PULLUP
+  on_press:
+    then:
+    - text_sensor.template.publish: {id: garage_entry_door, state: "OPEN"}
+  on_release:
+    then:
+    - text_sensor.template.publish: {id: garage_entry_door, state: "CLOSED"}
+
+text_sensor:
+- platform: template
+  name: deck_door
+  id: deck_door
+  lambda: !lambda |-
+    if (id(deck_door_binary_sensor).state) { return {"OPEN"}; } else { return {"CLOSED"}; }
+- platform: template
+  name: front_door
+  id: front_door
+  lambda: !lambda |-
+    if (id(front_door_binary_sensor).state) { return {"OPEN"}; } else { return {"CLOSED"}; }
+- platform: template
+  name: garage_entry_door
+  id: garage_entry_door
+  lambda: !lambda |-
+    if (id(garage_entry_door_binary_sensor).state) { return {"OPEN"}; } else { return {"CLOSED"}; }
