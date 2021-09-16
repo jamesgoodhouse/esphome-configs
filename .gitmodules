@@ -1,3 +1,4 @@
 [submodule "esphome-docs"]
 	path = esphome-docs
 	url = git@github.com:esphome/esphome-docs.git
+	branch = 2021.9.0
